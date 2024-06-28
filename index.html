@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <title>Popular Movies</title>
+    <style>
+      .card {
+        width: 230px;
+        margin-bottom: 20px;
+      }
+      .card img {
+        width: 230px;
+        object-fit: cover;
+      }
+
+      .btn {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .btn:hover {
+        background-color: RoyalBlue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+        <h1>Popular Movies</h1>
+        <div class="search-container">
+          <a href="Search.html"><button class="btn bg-blue">
+            Click here to Download your fav Movies/Series &nbsp; &nbsp;<i
+              class="fa fa-download"
+            ></i>
+          </button></a>
+        </div>
+      </div>
+      <div id="movie-container" class="row"></div>
+    </div>
+
+    <script src="popularScript.js" defer></script>
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

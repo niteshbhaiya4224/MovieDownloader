@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="script.js" defer></script>
+    <style>
+        .table-container {
+            margin-top: 20px;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .search-box {
+            width: 300px;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .table-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+        }
+        .table td {
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .download-icon {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .download-icon:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .no-results {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+            <h1>Download</h1>
+            <div class="search-container">
+                <form id="searchForm" class="form-inline" action="Search.html">
+                    <input
+                        type="text"
+                        class="form-control search-box"
+                        name="query"
+                        id="query"
+                        placeholder="Enter movie/series to download"
+                    />
+                    <button type="submit" class="btn btn-primary ml-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-container" id="results">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Size</th>
+                        <th>Uploader</th>
+                        <!-- <th>Seeders</th>
+                        <th>Leechers</th> -->
+                        <th>Download</th>
+                    </tr>
+                </thead>
+                <tbody id="results">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function displayResults(items) {
+            var resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            if (items && items.length > 0) {
+                items.forEach(item => {
+                    var row = document.createElement('tr');
+
+                    var title = document.createElement('td');
+                    title.textContent = item.name;
+                    row.appendChild(title);
+
+                    var category = document.createElement('td');
+                    category.textContent = item.category;
+                    row.appendChild(category);
+
+                    var date = document.createElement('td');
+                    date.textContent = item.date;
+                    row.appendChild(date);
+
+                    var size = document.createElement('td');
+                    size.textContent = item.size;
+                    row.appendChild(size);
+
+                    var uploader = document.createElement('td');
+                    uploader.textContent = item.uploader;
+                    row.appendChild(uploader);
+
+                    var link = document.createElement('td');
+                    var linkAnchor = document.createElement('a');
+                    linkAnchor.href = item.magnet;
+                    linkAnchor.innerHTML = '<i class="fas fa-download"></i> Download';
+                    row.appendChild(linkAnchor);
+                    
+                    resultsContainer.appendChild(row);
+                });
+            } else {
+                resultsContainer.innerHTML = '<tr><td colspan="8">No results found</td></tr>';
+            }
+        }
+
+        // Retrieve the data from local storage and display it
+        document.addEventListener('DOMContentLoaded', () => {
+            var movieData = localStorage.getItem('movieData');
+            if (movieData) {
+                displayResults(JSON.parse(movieData));
+            } else {
+                console.error('No movie data found in local storage');
+            }
+        });
+    </script>
+</body>
+</html>
